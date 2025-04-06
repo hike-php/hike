@@ -25,7 +25,7 @@ final readonly class Word implements Lexer
     public function match(Tokens $tokens): ?TokenInterface
     {
         foreach ($this->words as $word) {
-            $selection = Selection::from($tokens)->toNthToken(\strlen($word))->copy()->output(new Serialize());
+            $selection = Selection::from($tokens)->toNthToken(\strlen($word) - 1)->copy()->output(new Serialize());
             if ($selection === $word) {
                 return new Token($this->tokenName, $selection);
             }
