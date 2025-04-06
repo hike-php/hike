@@ -1,4 +1,9 @@
 {
+    "name": "hike/hike",
+    "description": "A consistent interface to tokenize, analyse and modify any text format. Programming languages, natural languages, markup languages",
+    "license": "BSD-2-Clause",
+    "homepage": "http://github.com/hike-php/hike",
+    "keywords": ["tokenizer", "parser", "lexer", "tokens", "static anaylsis"],
     "autoload": {
     	"psr-4": {"Hike\\": "src/", "Tests\\Hike\\": "tests/"}
     },
