@@ -19,7 +19,6 @@ final readonly class Debug implements Output
     {
         $tokens = $tokens
             ->modify(new Insert(Tokens::createFromArray([new Token(DebugToken::DebugIcon, $this->debugIcon)])))
-        ?? throw new \RuntimeException('Invalid tokens')
         ;
 
         return $tokens->output(new Serialize());

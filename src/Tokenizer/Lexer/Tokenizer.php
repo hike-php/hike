@@ -35,7 +35,7 @@ final readonly class Tokenizer implements TokenizerInterface
     }
 
     /**
-     * @return Token[]
+     * @return list<Token>
      */
     public function getTokens(): array
     {

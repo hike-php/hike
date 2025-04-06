@@ -20,11 +20,11 @@ final class TokenizerTest extends TestCase
 
         $tokens = Tokens::create(new Tokenizer($originalString));
 
-        $this->assertSame('C', $tokens->current()->value);
+        $this->assertSame('C', $tokens->current()?->value);
 
         $tokens = $tokens->navigate(new Next());
 
-        $this->assertSame('a', $tokens->current()->value);
+        $this->assertSame('a', $tokens?->current()?->value);
 
         $this->assertSame($originalString, $tokens->output(new Serialize()));
 

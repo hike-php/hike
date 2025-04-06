@@ -21,6 +21,7 @@ final class ReplaceTest extends TestCase
 
         $tokens = $tokens->navigate(new Next('that'));
 
+        $this->assertNotNull($tokens);
         $tokens = $tokens->modify(new Replace(Tokens::create(new Tokenizer('the'))));
 
         $output = $tokens->output(new Serialize());

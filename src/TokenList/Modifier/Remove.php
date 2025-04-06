@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Hike\TokenList\Modifier;
 
+use Hike\Tokenizer\Token;
 use Hike\TokenList\Modifier;
 use Hike\TokenList\Tokens;
 
@@ -13,6 +14,7 @@ final readonly class Remove implements Modifier
     {
         $rawTokens = $tokens->all();
         \array_splice($rawTokens, $tokens->cursorPosition, 1);
+        /** @var list<Token> $rawTokens */
 
         $newPosition = $tokens->cursorPosition - 1;
 

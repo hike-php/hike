@@ -40,7 +40,7 @@ final readonly class Tokens
     }
 
     /**
-     * @return array<Token>
+     * @return list<Token>
      */
     public function all(): array
     {

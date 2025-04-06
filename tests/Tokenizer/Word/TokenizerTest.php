@@ -21,17 +21,17 @@ final class TokenizerTest extends TestCase
 
         $tokens = Tokens::create(new Tokenizer($originalString));
 
-        $this->assertSame('Down', $tokens->current()->value);
+        $this->assertSame('Down', $tokens->current()?->value);
         $this->assertSame(Token::Word, $tokens->current()->name);
 
         $tokens = $tokens->navigate(new Next());
 
-        $this->assertSame(' ', $tokens->current()->value);
+        $this->assertSame(' ', $tokens?->current()?->value);
         $this->assertSame(Token::Space, $tokens->current()->name);
 
         $tokens = $tokens->navigate(new Next());
 
-        $this->assertSame('with', $tokens->current()->value);
+        $this->assertSame('with', $tokens?->current()?->value);
         $this->assertSame(Token::Word, $tokens->current()->name);
 
         $this->assertSame($originalString, $tokens->output(new Serialize()));

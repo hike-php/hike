@@ -17,7 +17,7 @@ final readonly class Serialize implements Output
 
         $out = '';
         do {
-            $out .= $parser->current()->value;
+            $out .= $parser->current()?->value;
         } while ($parser = $parser->navigate(new Next()));
 
         return $out;

@@ -21,12 +21,24 @@ final readonly class Selection
 
     public function to(Navigator ...$navigators): self
     {
-        return new self($this->from, $this->from->navigate(...$navigators));
+        $to = $this->from->navigate(...$navigators);
+
+        if ($to === null) {
+            throw new \RuntimeException('Invalid to selection');
+        }
+
+        return new self($this->from, $to);
     }
 
     public function toNthToken(int $num): self
     {
-        return new self($this->from, $this->from->move($num));
+        $to = $this->from->move($num);
+
+        if ($to === null) {
+            throw new \RuntimeException('Invalid to selection');
+        }
+
+        return new self($this->from, $to);
     }
 
     public function copy(): Tokens
@@ -35,6 +47,9 @@ final readonly class Selection
 
         $tokens = $this->from;
         for ($i = $this->from->cursorPosition; $i <= $this->to->cursorPosition; $i++) {
+            if ($tokens?->current() === null) {
+                throw new \RuntimeException('Invalid to position');
+            }
             $selectedTokens[] = $tokens->current();
             $tokens = $tokens->move(1);
         }
@@ -51,9 +66,11 @@ final readonly class Selection
 
         $tokens = $this->from;
         for ($i = $fromPosition; $i <= $toPosition; $i++) {
-            $tokens = $tokens->modify(new Remove())
-                             ->navigate(new Next())
-            ;
+            $tokens = $tokens->modify(new Remove());
+
+            if ($tokens->navigate(new Next())) {
+                $tokens = $tokens->navigate(new Next());
+            }
         }
 
         return $tokens;

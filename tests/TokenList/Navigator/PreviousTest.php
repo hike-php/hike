@@ -20,23 +20,23 @@ final class PreviousTest extends TestCase
         $tokens = Tokens::create(new Tokenizer('Ah, look at him there with his hairy hands!'));
         $tokens = $tokens->navigate(new End());
 
-        $this->assertSame(Token::Word, $tokens?->current()->name);
+        $this->assertSame(Token::Word, $tokens?->current()?->name);
 
         $tokens = $tokens->navigate(new Previous());
 
-        $this->assertSame(Token::Space, $tokens?->current()->name);
+        $this->assertSame(Token::Space, $tokens?->current()?->name);
 
         $tokens = $tokens->navigate(new Previous());
 
-        $this->assertSame(Token::Word, $tokens?->current()->name);
+        $this->assertSame(Token::Word, $tokens?->current()?->name);
 
         $tokens = $tokens->navigate(new Previous());
 
-        $this->assertSame(Token::Space, $tokens?->current()->name);
+        $this->assertSame(Token::Space, $tokens?->current()?->name);
 
         $tokens = $tokens->navigate(new Previous());
-        $this->assertSame(Token::Word, $tokens?->current()->name);
-        $this->assertSame('his', $tokens?->current()->value);
+        $this->assertSame(Token::Word, $tokens?->current()?->name);
+        $this->assertSame('his', $tokens->current()->value);
     }
 
     #[Test]
@@ -49,7 +49,7 @@ final class PreviousTest extends TestCase
         $tokens = $tokens?->navigate(new Previous('him', 'with'));
 
         $this->assertNotNull($tokens);
-        $this->assertSame('with', $tokens->current()->value);
+        $this->assertSame('with', $tokens->current()?->value);
     }
 
     #[Test]
@@ -62,7 +62,7 @@ final class PreviousTest extends TestCase
         $tokens = $tokens?->navigate(new Previous('with', 'him'));
 
         $this->assertNotNull($tokens);
-        $this->assertSame('with', $tokens->current()->value);
+        $this->assertSame('with', $tokens->current()?->value);
     }
 
     #[Test]
@@ -81,7 +81,7 @@ final class PreviousTest extends TestCase
     {
         $tokens = Tokens::create(new Tokenizer('Ah, look at him there with his hairy hands!'));
 
-        $tokens = $tokens?->navigate(new Previous());
+        $tokens = $tokens->navigate(new Previous());
 
         $this->assertNull($tokens);
     }
@@ -114,7 +114,7 @@ final class PreviousTest extends TestCase
         );
 
         $this->assertNotNull($tokens);
-        $this->assertSame('look', $tokens->current()->value);
+        $this->assertSame('look', $tokens->current()?->value);
     }
 
     #[Test]
@@ -128,6 +128,6 @@ final class PreviousTest extends TestCase
         );
 
         $this->assertNotNull($tokens);
-        $this->assertSame(Token::Space, $tokens->current()->name);
+        $this->assertSame(Token::Space, $tokens->current()?->name);
     }
 }

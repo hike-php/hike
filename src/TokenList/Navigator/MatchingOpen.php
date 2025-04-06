@@ -18,7 +18,7 @@ final class MatchingOpen implements Navigator
 
     public function apply(Tokens $tokens): ?Tokens
     {
-        $close = $tokens->current()->value;
+        $close = $tokens->current()?->value;
         $open = $this->matchingBrackets[$close] ?? null;
 
         if ($open === null) {
@@ -28,12 +28,12 @@ final class MatchingOpen implements Navigator
         $depth = 0;
 
         while ($tokens = $tokens->navigate(new Previous())) {
-            if ($tokens->current()->value === $open && $depth === 0) {
+            if ($tokens->current()?->value === $open && $depth === 0) {
                 break;
             }
-            if ($tokens->current()->value === $close) {
+            if ($tokens->current()?->value === $close) {
                 $depth++;
-            } elseif ($tokens->current()->value === $open) {
+            } elseif ($tokens->current()?->value === $open) {
                 $depth--;
             }
         }

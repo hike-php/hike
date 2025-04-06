@@ -32,10 +32,10 @@ final class SerializeTest extends TestCase
         $tokens = Tokens::create(new Tokenizer($input));
 
         $tokens = $tokens->navigate(new Next('resting'), new Next())
-            ->modify(new Insert(Tokens::create(new Tokenizer(' there'))))
+            ?->modify(new Insert(Tokens::create(new Tokenizer(' there'))))
         ;
 
-
+        $this->assertNotNull($tokens);
         $output = $tokens->output(new Serialize());
 
         $this->assertSame('That money was just resting there in my account', $output);

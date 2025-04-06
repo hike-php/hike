@@ -25,7 +25,7 @@ final readonly class Previous implements Navigator
             return $tokens;
         }
 
-        while ($tokens && !$tokens->current()->is(...$this->searches)) {
+        while ($tokens && !$tokens->current()?->is(...$this->searches)) {
             $tokens = $tokens->move(-1);
         }
 

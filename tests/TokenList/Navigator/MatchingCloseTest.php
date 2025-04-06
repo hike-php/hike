@@ -27,7 +27,7 @@ final class MatchingCloseTest extends TestCase
         $tokens = $tokens->navigate(new MatchingClose());
 
         $this->assertNotNull($tokens);
-        $this->assertSame('}', $tokens->current()->value);
+        $this->assertSame('}', $tokens->current()?->value);
 
         $this->assertNull($tokens->navigate(new Next()));
     }
@@ -45,9 +45,9 @@ final class MatchingCloseTest extends TestCase
         $tokens = $tokens->navigate(new MatchingClose());
 
         $this->assertNotNull($tokens);
-        $this->assertSame('}', $tokens->current()->value);
+        $this->assertSame('}', $tokens->current()?->value);
 
-        $this->assertSame('\'bar\';', $tokens->navigate(new Previous(Token::Word))->current()->value);
+        $this->assertSame('\'bar\';', $tokens->navigate(new Previous(Token::Word))?->current()?->value);
     }
 
     #[Test]
@@ -63,7 +63,7 @@ final class MatchingCloseTest extends TestCase
         $tokens = $tokens->navigate(new MatchingClose());
 
         $this->assertNotNull($tokens);
-        $this->assertSame(')', $tokens->current()->value);
+        $this->assertSame(')', $tokens->current()?->value);
 
         $this->assertSame(
             '12',
@@ -73,7 +73,7 @@ final class MatchingCloseTest extends TestCase
                     new Previous(),
                 )
                 ?->current()
-                ->value,
+                ?->value,
         );
     }
 
@@ -90,7 +90,7 @@ final class MatchingCloseTest extends TestCase
         $tokens = $tokens->navigate(new MatchingClose());
 
         $this->assertNotNull($tokens);
-        $this->assertSame(')', $tokens->current()->value);
+        $this->assertSame(')', $tokens->current()?->value);
 
         $this->assertSame(
             '(',
@@ -100,7 +100,7 @@ final class MatchingCloseTest extends TestCase
                     new Previous(),
                 )
                 ?->current()
-                ->value,
+                ?->value,
         );
     }
 

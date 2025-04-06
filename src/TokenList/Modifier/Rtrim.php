@@ -18,7 +18,7 @@ final readonly class Rtrim implements Modifier
     {
         $tokens = $tokens->navigate(new End()) ?? throw new \RuntimeException('Could not move cursor to end');
 
-        while ($tokens->current()->is($this->type)) {
+        while ($tokens->current()?->is($this->type)) {
             $tokens = $tokens->modify(new Remove());
         }
 

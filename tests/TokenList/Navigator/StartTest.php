@@ -20,11 +20,11 @@ final class StartTest extends TestCase
 
         $tokens = $tokens->navigate(new Next('eat'));
 
-        $this->assertSame('eat', $tokens?->current()->value);
+        $this->assertSame('eat', $tokens?->current()?->value);
 
         $tokens = $tokens->navigate(new Start());
 
-        $this->assertSame('Don\'t', $tokens?->current()->value);
+        $this->assertSame('Don\'t', $tokens?->current()?->value);
     }
 
     #[Test]

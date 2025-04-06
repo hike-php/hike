@@ -13,6 +13,9 @@ use Hike\TokenList\Tokens;
 
 final readonly class Word implements Lexer
 {
+    /**
+     * @var array<string>
+     */
     private array $words;
 
     public function __construct(

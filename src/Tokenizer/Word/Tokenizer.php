@@ -7,6 +7,7 @@ namespace Hike\Tokenizer\Word;
 use Hike\Tokenizer\Lexer\Lexer\CharacterList;
 use Hike\Tokenizer\Lexer\Lexer\CharacterListMode;
 use Hike\Tokenizer\Lexer\Tokenizer as LexerTokenizer;
+use Hike\Tokenizer\Token as TokenInterface;
 use Hike\Tokenizer\Tokenizer as TokenizerInterface;
 
 final readonly class Tokenizer implements TokenizerInterface
@@ -15,6 +16,9 @@ final readonly class Tokenizer implements TokenizerInterface
         private string $string,
     ) {}
 
+    /**
+     * @return list<TokenInterface>
+     */
     public function getTokens(): array
     {
         $tokenizer = LexerTokenizer::fromString($this->string);

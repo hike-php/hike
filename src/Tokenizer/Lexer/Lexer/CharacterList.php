@@ -31,10 +31,10 @@ final readonly class CharacterList implements Lexer
         $chars = [];
 
         do {
-            if (\in_array($tokens->current()->value, $this->allowedCharacters, true) !== $matchMode) {
+            if (\in_array($tokens->current()?->value, $this->allowedCharacters, true) !== $matchMode) {
                 break;
             }
-            $chars[] = $tokens->current()->value;
+            $chars[] = $tokens->current()?->value;
         } while ($tokens = $tokens->navigate(new Next()));
 
         if (empty($chars)) {

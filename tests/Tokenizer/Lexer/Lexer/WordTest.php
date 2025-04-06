@@ -22,6 +22,8 @@ class WordTest extends TestCase
 
         $tokens = $tokens->navigate(new Next('m'));
 
+        $this->assertNotNull($tokens);
+
         $token = $fixture->match($tokens);
 
         $this->assertNotNull($token);

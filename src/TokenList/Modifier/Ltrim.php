@@ -18,7 +18,7 @@ final readonly class Ltrim implements Modifier
     {
         $tokens = $tokens->navigate(new Start()) ?? throw new \RuntimeException('Could not move cursor to start');
 
-        while ($tokens->current()->is($this->type)) {
+        while ($tokens->current()?->is($this->type)) {
             $tokens = $tokens->modify(new Remove());
         }
 

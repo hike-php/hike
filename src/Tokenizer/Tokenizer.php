@@ -7,7 +7,7 @@ namespace Hike\Tokenizer;
 interface Tokenizer
 {
     /**
-     * @return Token[]
+     * @return list<Token>
      */
     public function getTokens(): array;
 }

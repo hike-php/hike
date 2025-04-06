@@ -19,7 +19,7 @@ final readonly class SkipOver implements Navigator
 
     public function apply(Tokens $tokens): ?Tokens
     {
-        while ($tokens && $tokens->current()->is(...$this->searches)) {
+        while ($tokens && $tokens->current()?->is(...$this->searches)) {
             $tokens = $tokens->navigate(new Next());
         }
 

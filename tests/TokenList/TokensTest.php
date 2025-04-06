@@ -161,7 +161,7 @@ final class TokensTest extends TestCase
 
         $tokens = $tokens->navigate(new Start());
 
-        $this->assertSame('eyes!', $tokens?->current()->value);
+        $this->assertSame('eyes!', $tokens?->current()?->value);
     }
 
     #[Test]

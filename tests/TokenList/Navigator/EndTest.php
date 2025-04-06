@@ -17,10 +17,10 @@ final class EndTest extends TestCase
     {
         $tokens = Tokens::create(new Tokenizer('We built an extension on the extension and now the house is a circle'));
 
-        $this->assertSame('We', $tokens->current()->value);
+        $this->assertSame('We', $tokens->current()?->value);
 
         $tokens = $tokens->navigate(new End());
 
-        $this->assertSame('circle', $tokens?->current()->value);
+        $this->assertSame('circle', $tokens?->current()?->value);
     }
 }

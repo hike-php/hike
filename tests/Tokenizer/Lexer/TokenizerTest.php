@@ -20,7 +20,7 @@ final class TokenizerTest extends TestCase
         $lexer1 = new class () implements Lexer {
             public function match(Tokens $tokens): ?TokenInterface
             {
-                if ($tokens->current()->value === '1') {
+                if ($tokens->current()?->value === '1') {
                     return new Token(SampleTokens::Token1, '1');
                 }
                 return null;
@@ -30,7 +30,7 @@ final class TokenizerTest extends TestCase
         $lexer2 = new class () implements Lexer {
             public function match(Tokens $tokens): ?TokenInterface
             {
-                if ($tokens->current()->value === '2') {
+                if ($tokens->current()?->value === '2') {
                     return new Token(SampleTokens::Token2, '2');
                 }
                 return null;
@@ -40,7 +40,7 @@ final class TokenizerTest extends TestCase
         $lexer3 = new class () implements Lexer {
             public function match(Tokens $tokens): ?TokenInterface
             {
-                if ($tokens->current()->value === '3') {
+                if ($tokens->current()?->value === '3') {
                     return new Token(SampleTokens::Token3, '3');
                 }
                 return null;
@@ -78,7 +78,7 @@ final class TokenizerTest extends TestCase
         $lexer1 = new class () implements Lexer {
             public function match(Tokens $tokens): ?TokenInterface
             {
-                if ($tokens->current()->value === ' ') {
+                if ($tokens->current()?->value === ' ') {
                     return new Token(SampleTokens::Token1, ' ');
                 }
                 return null;
@@ -89,15 +89,15 @@ final class TokenizerTest extends TestCase
         $lexer2 = new class () implements Lexer {
             public function match(Tokens $tokens): ?TokenInterface
             {
-                if ($tokens->current()->value === ' ') {
+                if ($tokens->current()?->value === ' ') {
                     return null;
                 }
 
                 $string = '';
                 do {
-                    $string .= $tokens->current()->value;
+                    $string .= $tokens->current()?->value;
                     $tokens = $tokens->move(1);
-                } while ($tokens && $tokens->current()->value !== ' ');
+                } while ($tokens && $tokens->current()?->value !== ' ');
 
 
                 return new Token(SampleTokens::Token2, $string);
@@ -117,8 +117,12 @@ final class TokenizerTest extends TestCase
         $this->assertSame(' ', $tokens[1]->value);
         $this->assertSame(SampleTokens::Token2, $tokens[2]->name);
         $this->assertSame('would', $tokens[2]->value);
-        $this->assertSame(SampleTokens::Token2, \end($tokens)->name);
-        $this->assertSame('matter', \end($tokens)->value);
+        $token = \end($tokens);
+        if ($token === false) {
+            $token = null;
+        }
+        $this->assertSame(SampleTokens::Token2, $token?->name);
+        $this->assertSame('matter', $token->value);
 
     }
 }

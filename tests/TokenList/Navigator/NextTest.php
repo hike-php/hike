@@ -19,21 +19,21 @@ final class NextTest extends TestCase
     {
         $tokens = Tokens::create(new Tokenizer('Ah, look at him there with his hairy hands!'));
 
-        $this->assertSame('Ah,', $tokens->current()->value);
+        $this->assertSame('Ah,', $tokens->current()?->value);
         $this->assertSame(Token::Word, $tokens->current()->name);
 
         $tokens = $tokens->navigate(new Next());
 
-        $this->assertSame(Token::Space, $tokens?->current()->name);
+        $this->assertSame(Token::Space, $tokens?->current()?->name);
 
         $tokens = $tokens->navigate(new Next());
 
-        $this->assertSame(Token::Word, $tokens?->current()->name);
+        $this->assertSame(Token::Word, $tokens?->current()?->name);
         $this->assertSame('look', $tokens->current()->value);
 
         $tokens = $tokens->navigate(new Next());
 
-        $this->assertSame(Token::Space, $tokens?->current()->name);
+        $this->assertSame(Token::Space, $tokens?->current()?->name);
     }
 
     #[Test]
@@ -44,7 +44,7 @@ final class NextTest extends TestCase
         $tokens = $tokens->navigate(new Next('him', 'his', 'look'));
 
         $this->assertNotNull($tokens);
-        $this->assertSame(Token::Word, $tokens->current()->name);
+        $this->assertSame(Token::Word, $tokens->current()?->name);
         $this->assertSame('look', $tokens->current()->value);
     }
 
@@ -56,7 +56,7 @@ final class NextTest extends TestCase
         $tokens = $tokens->navigate(new Next('look', 'him', 'his'));
 
         $this->assertNotNull($tokens);
-        $this->assertSame(Token::Word, $tokens->current()->name);
+        $this->assertSame(Token::Word, $tokens->current()?->name);
         $this->assertSame('look', $tokens->current()->value);
     }
 
@@ -106,7 +106,7 @@ final class NextTest extends TestCase
         );
 
         $this->assertNotNull($tokens);
-        $this->assertSame('hands!', $tokens->current()->value);
+        $this->assertSame('hands!', $tokens->current()?->value);
     }
 
     #[Test]
@@ -119,6 +119,6 @@ final class NextTest extends TestCase
         );
 
         $this->assertNotNull($tokens);
-        $this->assertSame(Token::Space, $tokens->current()->name);
+        $this->assertSame(Token::Space, $tokens->current()?->name);
     }
 }

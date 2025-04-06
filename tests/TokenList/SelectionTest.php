@@ -21,6 +21,7 @@ final class SelectionTest extends TestCase
             ->navigate(new Next('a'))
         ;
 
+        $this->assertNotNull($tokens);
         $selection = Selection::from($tokens)
             ->to(new Next('d'), new Next('d'))
         ;
@@ -37,6 +38,7 @@ final class SelectionTest extends TestCase
             ->navigate(new Next('a'))
         ;
 
+        $this->assertNotNull($tokens);
         $selection = Selection::from($tokens)
             ->toNthToken(5)
         ;
@@ -53,6 +55,7 @@ final class SelectionTest extends TestCase
             ->navigate(new Next('a'))
         ;
 
+        $this->assertNotNull($tokens);
         $selection = Selection::from($tokens)
             ->to(
                 new Next('d'), //d in should
@@ -74,6 +77,7 @@ final class SelectionTest extends TestCase
             ->navigate(new Next('a'))
         ;
 
+        $this->assertNotNull($tokens);
         $selection = Selection::from($tokens)
             ->toNthToken(6)
         ;

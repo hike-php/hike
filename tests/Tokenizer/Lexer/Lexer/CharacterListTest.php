@@ -24,6 +24,8 @@ class CharacterListTest extends TestCase
 
         $tokens = $tokens->navigate(new Next('l'));
 
+        $this->assertNotNull($tokens);
+
         $token = $fixture->match($tokens);
 
         $this->assertNotNull($token);
@@ -39,6 +41,8 @@ class CharacterListTest extends TestCase
         $fixture = new CharacterList(Token::Space, range('a', 'z'), CharacterListMode::Exclusive);
 
         $tokens = $tokens->navigate(new Next(' '));
+
+        $this->assertNotNull($tokens);
 
         $token = $fixture->match($tokens);
 

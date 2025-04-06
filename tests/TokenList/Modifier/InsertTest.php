@@ -28,6 +28,7 @@ final class InsertTest extends TestCase
             new Next(Token::Space),
         );
 
+        $this->assertNotNull($tokens);
         $tokens = $tokens->modify(new Insert($tokensToInsert));
 
         $output = $tokens->output(new Serialize());
@@ -47,6 +48,7 @@ final class InsertTest extends TestCase
             new Next(Token::Space),
         );
 
+        $this->assertNotNull($tokens);
         $tokens = $tokens->modify(new Insert($tokensToInsert, InsertMode::Append));
 
         $output = $tokens->output(new Serialize());
