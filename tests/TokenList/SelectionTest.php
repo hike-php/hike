@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Hike\TokenList\Selection;
 
-use Hike\TokenList\Navigator\End;
-use Hike\TokenList\Navigator\Start;
 use Hike\Tokenizer\Character\Tokenizer;
+use Hike\TokenList\Navigator\End;
 use Hike\TokenList\Navigator\Next;
+use Hike\TokenList\Navigator\Start;
 use Hike\TokenList\Output\Serialize;
 use Hike\TokenList\Selection;
 use Hike\TokenList\Tokens;

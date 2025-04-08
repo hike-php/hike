@@ -46,7 +46,7 @@ final readonly class Selection
         $selectedTokens = [];
 
         $tokens = $this->from;
-        while ($tokens && $tokens->cursorPosition <= $this->to->cursorPosition) {
+        while ($tokens?->current() && $tokens->cursorPosition <= $this->to->cursorPosition) {
             $selectedTokens[] = $tokens->current();
             $tokens = $tokens->move(1);
         }
