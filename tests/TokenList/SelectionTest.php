@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Hike\TokenList\Selection;
 
+use Hike\TokenList\Navigator\End;
+use Hike\TokenList\Navigator\Start;
 use Hike\Tokenizer\Character\Tokenizer;
 use Hike\TokenList\Navigator\Next;
 use Hike\TokenList\Output\Serialize;
@@ -85,5 +87,35 @@ final class SelectionTest extends TestCase
         $result = $selection->delete();
 
         $this->assertSame('A string with that should be selected and some trailing text.', $result->output(new Serialize()));
+    }
+
+    #[Test]
+    public function it_throws_if_the_nth_to_token_doesnt_exist(): void
+    {
+        $tokens = Tokens::create(new Tokenizer('A string with a part that should be selected and some trailing text.'))
+            ->navigate(new Next('a'))
+        ;
+
+        $this->expectException(\RuntimeException::class);
+
+        $this->assertNotNull($tokens);
+        Selection::from($tokens)
+            ->toNthToken(600)
+        ;
+    }
+
+    #[Test]
+    public function it_throws_if_the_to_token_doesnt_exist(): void
+    {
+        $tokens = Tokens::create(new Tokenizer('A string with a part that should be selected and some trailing text.'))
+            ->navigate(new Next('a'))
+        ;
+
+        $this->expectException(\RuntimeException::class);
+
+        $this->assertNotNull($tokens);
+        Selection::from($tokens)
+            ->to(new Next('not there'))
+        ;
     }
 }

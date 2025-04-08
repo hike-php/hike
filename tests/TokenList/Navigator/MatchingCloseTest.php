@@ -104,6 +104,25 @@ final class MatchingCloseTest extends TestCase
         );
     }
 
+    #[Test]
+    public function it_throws_if_there_is_no_matching_close_character(): void
+    {
+        $tokens = Tokens::create(
+            new Tokenizer(<<<'EOT'
+            Here's an open for an unconfigured close
+
+            :
+
+
+            there is no close
+            EOT),
+        );
+
+        $this->expectException(\RuntimeException::class);
+
+        $tokens = $tokens->navigate(new Next(':'), new MatchingClose());
+    }
+
     private function getTokens(): Tokens
     {
         return Tokens::create(new Tokenizer(<<<'EOT'

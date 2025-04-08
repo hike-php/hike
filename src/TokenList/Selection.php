@@ -46,10 +46,7 @@ final readonly class Selection
         $selectedTokens = [];
 
         $tokens = $this->from;
-        for ($i = $this->from->cursorPosition; $i <= $this->to->cursorPosition; $i++) {
-            if ($tokens?->current() === null) {
-                throw new \RuntimeException('Invalid to position');
-            }
+        while ($tokens && $tokens->cursorPosition <= $this->to->cursorPosition) {
             $selectedTokens[] = $tokens->current();
             $tokens = $tokens->move(1);
         }
